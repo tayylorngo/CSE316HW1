@@ -28,6 +28,9 @@ export default class ToDoController {
         }
         document.getElementById("add-item-button").onmousedown = function() {
             appModel.addNewItemTransaction();
+        }
+        document.getElementById("close-list-button").onmousedown = function(){
+            appModel.closeList();
         }  
     }
     

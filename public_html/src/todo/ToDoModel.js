@@ -134,6 +134,7 @@ export default class ToDoModel {
     }
 
     /**
+     * @author Taylor Ngo
      * Moves the current list to the front
      */
     moveListToFront(listId){
@@ -197,5 +198,14 @@ export default class ToDoModel {
         if (this.tps.hasTransactionToUndo()) {
             this.tps.undoTransaction();
         }
-    } 
+    }
+    
+    /**
+     * @author Taylor Ngo
+     * Closes the current open list
+     */
+    closeList(){
+        this.view.clearItemsList();
+        this.view.refreshLists(this.toDoLists);
+    }
 }
