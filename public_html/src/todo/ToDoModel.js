@@ -119,6 +119,8 @@ export default class ToDoModel {
      * Load the items for the listId list into the UI.
      */
     loadList(listId) {
+        this.moveListToFront(listId);
+        this.view.refreshLists(this.toDoLists);
         let listIndex = -1;
         for (let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++) {
             if (this.toDoLists[i].id === listId)
@@ -128,6 +130,25 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
+        }
+    }
+
+    /**
+     * Moves the current list to the front
+     */
+    moveListToFront(listId){
+        let listIndex = -1;
+        for(let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++){
+            if(this.toDoLists[i].id === listId)
+                listIndex = i;
+        }
+        if(listIndex >= 0){
+            let tempList = this.toDoLists[listIndex];
+            this.toDoLists[listIndex] = null;
+            for(let i = listIndex; i > 0; i--){
+                this.toDoLists[i] = this.toDoLists[i - 1]; 
+            }
+            this.toDoLists[0] = tempList;
         }
     }
 
