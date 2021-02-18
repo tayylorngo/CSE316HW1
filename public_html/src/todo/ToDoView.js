@@ -25,6 +25,8 @@ export default class ToDoView {
         let thisController = this.controller;
         listElement.onmousedown = function() {
             thisController.handleLoadList(newList.id);
+            console.log("CHANGE COLOR");
+            document.getElementById(newListId).style.color = "#ffc800";
         }
     }
 
