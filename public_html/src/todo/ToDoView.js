@@ -74,6 +74,17 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
             itemsListDiv.innerHTML += listItemElement;
+
+            // CHANGES COLOR OF THE COMPLETE/INCOMPLETE ITEMS
+            const status = document.getElementsByClassName("status-col");
+            for(let i = 0; i < status.length; i++){
+                if(status[i].innerHTML === "complete"){
+                   status[i].style.color = "#8ed4f8";     
+                }
+                else if(status[i].innerHTML === "incomplete"){
+                    status[i].style.color = "#f5bc75";     
+                }
+            }
         }
     }
 
