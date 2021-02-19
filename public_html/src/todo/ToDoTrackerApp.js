@@ -52,4 +52,12 @@ window.onload = function() {
     // MAKE THE APP AND LAUNCH IT
     let app = new ToDoTrackerApp();
     app.launch("./src/test/TestToDoLists.json");
+
+    // if cancel delete list button is clicked, then it will disappear
+    const deleteListButtons = document.getElementsByClassName("deleteList");
+    for(let i = 0; i < deleteListButtons.length; i++){
+        deleteListButtons[i].addEventListener("click", function(){
+            document.getElementById("modal-overlay").style.display = "none";
+        });
+    }
 }

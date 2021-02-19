@@ -131,6 +131,9 @@ export default class ToDoModel {
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
         }
+
+        // ENABLES DELETE BUTTON WHEN OPENING LIST
+        this.enableListItems();
     }
 
     /**
@@ -184,6 +187,9 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+
+        // DISABLES DELETE LIST BUTTON WHEN LIST IS DELETED
+        this.disableListItems();
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -207,5 +213,24 @@ export default class ToDoModel {
     closeList(){
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+        
+        // DISABLES DELETE LIST BUTTON WHEN LIST IS CLOSED
+        this.disableListItems();
+    }
+
+    disableListItems(){
+        const listItems = document.getElementsByClassName("list-item-control");
+        for(let i = 0; i < listItems.length; i++){
+            listItems[i].style.pointerEvents = "none";
+            listItems[i].style.color = "#322d2d";
+        }
+    }
+
+    enableListItems(){
+        const listItems = document.getElementsByClassName("list-item-control");
+        for(let i = 0; i < listItems.length; i++){
+            listItems[i].style.pointerEvents = "auto";
+            listItems[i].style.color = "white";
+        }
     }
 }

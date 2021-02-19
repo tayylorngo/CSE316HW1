@@ -23,15 +23,21 @@ export default class ToDoController {
         document.getElementById("redo-button").onmousedown = function() {
             appModel.redo();
         }
+        // OPENS DELETE LIST MODAL
         document.getElementById("delete-list-button").onmousedown = function() {
+            document.getElementById("modal-overlay").style.display = "block";
+        }
+        // DELETES LIST AND CLOSES MODAL
+        document.getElementById("confirmDeleteList-button").onmousedown = function(){
             appModel.removeCurrentList();
+            document.getElementById("modal-overlay").style.display = "none";
         }
         document.getElementById("add-item-button").onmousedown = function() {
             appModel.addNewItemTransaction();
         }
         document.getElementById("close-list-button").onmousedown = function(){
             appModel.closeList();
-        }  
+        }
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
