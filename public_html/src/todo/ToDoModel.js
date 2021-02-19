@@ -218,6 +218,10 @@ export default class ToDoModel {
         this.disableListItems();
     }
 
+    /**
+     * @author Taylor Ngo
+     * Disables the list items for current list
+     */
     disableListItems(){
         const listItems = document.getElementsByClassName("list-item-control");
         for(let i = 0; i < listItems.length; i++){
@@ -226,6 +230,10 @@ export default class ToDoModel {
         }
     }
 
+    /**
+     * @author Taylor Ngo
+     * Enables the list items for current list
+     */
     enableListItems(){
         const listItems = document.getElementsByClassName("list-item-control");
         for(let i = 0; i < listItems.length; i++){
