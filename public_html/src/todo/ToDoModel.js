@@ -4,6 +4,7 @@ import ToDoList from './ToDoList.js'
 import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
+import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 
 /**
  * ToDoModel
@@ -77,6 +78,19 @@ export default class ToDoModel {
     }
 
     /**
+     * @author Taylor Ngo
+     * 
+     * @param {} item 
+     * @param {*} index 
+     * 
+     * Adds item at specific index
+     */
+    addItemAtIndex(item, index){
+        
+
+    }
+
+    /**
      * addNewList
      * 
      * This function makes a new list and adds it to the application. The list will
@@ -115,6 +129,11 @@ export default class ToDoModel {
         this.addItemToList(list, newItem);
     }
 
+    removeItemTransaction(item){
+        let transaction = new DeleteItem_Transaction(this, item);
+        this.tps.addTransaction(transaction);
+    } 
+
     /**
      * Load the items for the listId list into the UI.
      */
@@ -131,9 +150,17 @@ export default class ToDoModel {
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
         }
-
         // ENABLES DELETE BUTTON WHEN OPENING LIST
         this.enableListItems();
+
+        const deleteButtons = document.getElementsByClassName("deleteItemButton");
+        for(let i = 0; i < deleteButtons.length; i++){
+            deleteButtons[i].onmousedown = function(){
+                let itemId = deleteButtons[i].parentNode.parentNode.id;
+                itemId = itemId[itemId.length - 1];
+                console.log("WHY IS THIS NOT WORKING?!?!?!");
+            }
+        }
     }
 
     /**
@@ -169,8 +196,9 @@ export default class ToDoModel {
      * Remove the itemToRemove from the current list and refresh.
      */
     removeItem(itemToRemove) {
-        this.currentList.removeItem(itemToRemove);
+        const removedItem = this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
+        return removedItem;
     }
 
     /**

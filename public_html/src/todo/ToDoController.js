@@ -39,7 +39,6 @@ export default class ToDoController {
             appModel.closeList();
         }
     }
-    
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
     handleLoadList(listId) {
         // UNLOAD THE CURRENT LIST AND INSTEAD LOAD THE CURRENT LIST

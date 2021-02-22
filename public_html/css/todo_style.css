@@ -53,6 +53,10 @@
     border-bottom: dotted;
 }
 
+#todo-lists-list{
+    background-color: var(--swatch-complement);
+}
+
 .list-header-card {
     border-bottom: dotted;
 }

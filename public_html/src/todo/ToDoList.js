@@ -52,7 +52,9 @@ export default class ToDoList {
                 indexOfItem = i;
             }
         }
+        // const removedItem = this.items[indexOfItem];
         this.items.splice(indexOfItem, 1);
+        // return [removedItem, indexOfItem];
     }
 
     /**

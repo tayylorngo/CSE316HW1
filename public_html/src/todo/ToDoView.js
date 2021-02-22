@@ -18,7 +18,12 @@ export default class ToDoView {
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todo_button");
-        listElement.appendChild(document.createTextNode(newList.name));
+
+        let listNameText = document.createElement("h4");
+        listNameText.setAttribute("class", "listTextName");
+        listNameText.appendChild(document.createTextNode(newList.name));
+        // listElement.appendChild(document.createTextNode(newList.name));
+        listElement.appendChild(listNameText);
         listsElement.appendChild(listElement);
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
@@ -27,6 +32,9 @@ export default class ToDoView {
             thisController.handleLoadList(newList.id);
             document.getElementById(newListId).style.color = "#ffc800";
         }
+
+
+
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
@@ -69,7 +77,7 @@ export default class ToDoView {
                                 + "<div class='list-controls-col'>"
                                 + " <div class='list-item-control material-icons'>keyboard_arrow_up</div>"
                                 + " <div class='list-item-control material-icons'>keyboard_arrow_down</div>"
-                                + " <div class='list-item-control material-icons'>close</div>"
+                                + " <div class='list-item-control material-icons deleteItemButton'>close</div>"
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";

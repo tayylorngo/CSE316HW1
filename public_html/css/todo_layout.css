@@ -72,6 +72,10 @@
     width: 20%;
 }
 
+/* .listTextName{
+    background-color: var(--swatch-primary);
+} */
+
 #modal-overlay{
     display: none;
     position: fixed;
