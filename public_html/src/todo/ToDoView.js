@@ -19,11 +19,21 @@ export default class ToDoView {
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todo_button");
 
+        // CREATES LIST NAME TEXT
         let listNameText = document.createElement("h4");
         listNameText.setAttribute("class", "listTextName");
-        listNameText.appendChild(document.createTextNode(newList.name));
+        listNameText.setAttribute("id", "todo-list-text-" + newList.id);
+
         // listElement.appendChild(document.createTextNode(newList.name));
+
+        // CREATES FORM TO CHANGE LIST NAME
+        let listNameChangeInput = document.createElement("input");
+        listNameChangeInput.setAttribute("id", "todo-list-text-form-" + newList.id);
+        listNameChangeInput.style.display = "none";
+
+        listNameText.appendChild(document.createTextNode(newList.name));
         listElement.appendChild(listNameText);
+        listElement.appendChild(listNameChangeInput);
         listsElement.appendChild(listElement);
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
@@ -32,9 +42,6 @@ export default class ToDoView {
             thisController.handleLoadList(newList.id);
             document.getElementById(newListId).style.color = "#ffc800";
         }
-
-
-
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
@@ -45,6 +52,8 @@ export default class ToDoView {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
         }
+        // DISABLES DELETE LIST BUTTON WHEN LIST IS CLOSED
+        this.disableListItems();
     }
 
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
@@ -93,6 +102,32 @@ export default class ToDoView {
                     status[i].style.color = "#f5bc75";     
                 }
             }
+
+            this.enableListItems();
+        }
+    }
+
+    /**
+     * @author Taylor Ngo
+     * Disables the list items for current list
+     */
+    disableListItems(){
+        const listItems = document.getElementsByClassName("list-item-control");
+        for(let i = 0; i < listItems.length; i++){
+            listItems[i].style.pointerEvents = "none";
+            listItems[i].style.color = "#322d2d";
+        }
+    }
+
+    /**
+     * @author Taylor Ngo
+     * Enables the list items for current list
+     */
+    enableListItems(){
+        const listItems = document.getElementsByClassName("list-item-control");
+        for(let i = 0; i < listItems.length; i++){
+            listItems[i].style.pointerEvents = "auto";
+            listItems[i].style.color = "white";
         }
     }
 

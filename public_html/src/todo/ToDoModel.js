@@ -114,6 +114,7 @@ export default class ToDoModel {
         let newItem = new ToDoListItem(this.nextListItemId++);
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
+        this.enableDeleteItemButtons();
         return newItem;
     }
 
@@ -149,18 +150,9 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
+            this.enableDeleteItemButtons();
         }
-        // ENABLES DELETE BUTTON WHEN OPENING LIST
-        this.enableListItems();
 
-        const deleteButtons = document.getElementsByClassName("deleteItemButton");
-        for(let i = 0; i < deleteButtons.length; i++){
-            deleteButtons[i].onmousedown = function(){
-                let itemId = deleteButtons[i].parentNode.parentNode.id;
-                itemId = itemId[itemId.length - 1];
-                console.log("WHY IS THIS NOT WORKING?!?!?!");
-            }
-        }
     }
 
     /**
@@ -198,6 +190,7 @@ export default class ToDoModel {
     removeItem(itemToRemove) {
         const removedItem = this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
+        this.enableDeleteItemButtons();
         return removedItem;
     }
 
@@ -215,9 +208,6 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
-
-        // DISABLES DELETE LIST BUTTON WHEN LIST IS DELETED
-        this.disableListItems();
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -241,32 +231,19 @@ export default class ToDoModel {
     closeList(){
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
-        
-        // DISABLES DELETE LIST BUTTON WHEN LIST IS CLOSED
-        this.disableListItems();
     }
 
     /**
      * @author Taylor Ngo
-     * Disables the list items for current list
+     * 
      */
-    disableListItems(){
-        const listItems = document.getElementsByClassName("list-item-control");
-        for(let i = 0; i < listItems.length; i++){
-            listItems[i].style.pointerEvents = "none";
-            listItems[i].style.color = "#322d2d";
-        }
-    }
-
-    /**
-     * @author Taylor Ngo
-     * Enables the list items for current list
-     */
-    enableListItems(){
-        const listItems = document.getElementsByClassName("list-item-control");
-        for(let i = 0; i < listItems.length; i++){
-            listItems[i].style.pointerEvents = "auto";
-            listItems[i].style.color = "white";
+    enableDeleteItemButtons(){
+        // DELETE ITEM FUNCTIONS
+        const deleteButtons = document.getElementsByClassName("deleteItemButton");
+        for(let i = 0; i < deleteButtons.length; i++){
+            deleteButtons[i].onmousedown = () => {
+                this.addNewItemTransaction();
+            }
         }
     }
 }
