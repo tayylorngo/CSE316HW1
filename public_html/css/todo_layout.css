@@ -73,9 +73,10 @@
     width: 20%;
 }
 
-/* .listTextName{
-    background-color: var(--swatch-primary);
-} */
+.listTextName{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
 
 #modal-overlay{
     display: none;

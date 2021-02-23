@@ -55,6 +55,7 @@
 
 #todo-lists-list{
     background-color: var(--swatch-complement);
+    /* align-items: center; */
 }
 
 .list-header-card {

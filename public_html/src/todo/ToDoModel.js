@@ -83,16 +83,17 @@ export default class ToDoModel {
      * @param {} item 
      * @param {*} index 
      * 
-     * Adds item at specific index
+     * Adds item at specific index to a certain list
      */
-    addItemAtIndex(item, index, id){
-        for(let i = 0; i < this.toDoLists.length; i++){
-            if(id === this.toDoLists[i].id){
-                this.toDoLists[i].addItemAtIndex(item, index);
-            }
-        }
+    addItemAtIndex(item, index){
+        // for(let i = 0; i < this.toDoLists.length; i++){
+        //     if(id === this.toDoLists[i].id){
+                this.currentList.addItemAtIndex(item, index);
+        //     }
+        // }
         // this.toDoLists[id].addItemAtIndex(item, index);
         this.view.viewList(this.currentList);
+        this.enableDeleteItemButtons();
     }
 
     /**
@@ -157,6 +158,7 @@ export default class ToDoModel {
             this.view.viewList(this.currentList);
             this.enableDeleteItemButtons();
         }
+        this.tps.clearAllTransactions();
     }
 
     /**
@@ -191,13 +193,22 @@ export default class ToDoModel {
     /**
      * Remove the itemToRemove from the current list and refresh.
      */
-    removeItem(itemToRemove, listId) {
+    removeItem(itemToRemove) {
+        this.currentList.removeItem(itemToRemove);
+        this.view.viewList(this.currentList);
+    }
+
+    /**
+     * Remove the itemToRemove from a certain list and refresh.
+     * @author Taylor Ngo
+     */
+    removeItemFromList(itemToRemove) {
         let removedStuff = [];
-        for(let i = 0; i < this.toDoLists.length; i++){
-            if(listId === this.toDoLists[i].id){
-                removedStuff = this.toDoLists[i].removeItem(itemToRemove);
-            }
-        }
+        // for(let i = 0; i < this.toDoLists.length; i++){
+        //     if(listId === this.toDoLists[i].id){
+        removedStuff = this.currentList.removeItem(itemToRemove);
+        //     }
+        // }
         this.view.viewList(this.currentList);
         this.enableDeleteItemButtons();
         return removedStuff;
@@ -243,11 +254,11 @@ export default class ToDoModel {
     }
 
     /**
-     * @author Taylor Ngo
+     * Gives onmousedown function to the delete item buttons
      * 
+     * @author Taylor Ngo
      */
     enableDeleteItemButtons(){
-        // DELETE ITEM FUNCTIONS
         const deleteButtons = document.getElementsByClassName("deleteItemButton");
         for(let i = 0; i < deleteButtons.length; i++){
             deleteButtons[i].onmousedown = () => {

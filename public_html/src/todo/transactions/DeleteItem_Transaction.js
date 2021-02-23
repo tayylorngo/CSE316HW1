@@ -14,11 +14,11 @@ export default class DeleteItem_Transaction extends jsTPS_Transaction {
     }
 
     doTransaction() {
-        this.removedStuff = this.model.removeItem(new ToDoListItem(this.itemId), this.listId);
+        this.removedStuff = this.model.removeItemFromList(new ToDoListItem(this.itemId));
     }
 
     undoTransaction() {
         // console.log(this.removedStuff);
-        this.model.addItemAtIndex(this.removedStuff[0], this.removedStuff[1], this.removedStuff[2]);
+        this.model.addItemAtIndex(this.removedStuff[0], this.removedStuff[1]);
     }
 }
