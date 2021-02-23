@@ -86,8 +86,8 @@ export default class ToDoModel {
      * Adds item at specific index
      */
     addItemAtIndex(item, index){
-        
-
+        this.currentList.addItemAtIndex(item, index);
+        this.view.viewList(this.currentList);
     }
 
     /**
@@ -187,9 +187,10 @@ export default class ToDoModel {
      * Remove the itemToRemove from the current list and refresh.
      */
     removeItem(itemToRemove) {
-        this.currentList.removeItem(itemToRemove);
+        let removedStuff = this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
         this.enableDeleteItemButtons();
+        return removedStuff;
     }
 
     /**

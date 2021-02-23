@@ -41,6 +41,14 @@ export default class ToDoList {
     }
 
     /**
+     * 
+     * @author Taylor Ngo
+     */
+    addItemAtIndex(item, index){
+        this.items.splice(index, 0, item);
+    }
+
+    /**
      * Finds and then removes the argument from the list.
      * 
      * @param {TodoListItem} itemToRemove Item to remove from the list.
@@ -52,7 +60,9 @@ export default class ToDoList {
                 indexOfItem = i;
             }
         }
+        let removedItem = this.items[indexOfItem];
         this.items.splice(indexOfItem, 1);
+        return [removedItem, indexOfItem];
     }
 
     /**

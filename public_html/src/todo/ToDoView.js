@@ -102,8 +102,8 @@ export default class ToDoView {
                     status[i].style.color = "#f5bc75";     
                 }
             }
-            this.enableListItems();
         }
+        this.enableListItems();
     }
 
     /**
