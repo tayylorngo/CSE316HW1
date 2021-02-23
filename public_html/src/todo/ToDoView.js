@@ -134,4 +134,73 @@ export default class ToDoView {
     setController(initController) {
         this.controller = initController;
     }
+
+    /**
+     * Disables the add new list button
+     * @author Taylor Ngo
+     */
+    disableAddListButton(){
+        const addListButton = document.getElementById("add-list-button");
+        addListButton.style.pointerEvents = "none";
+        addListButton.style.color = "#322d2d";
+    }
+
+    /**
+     * Enables the add new list button
+     * @author Taylor Ngo
+     */
+    enableAddListButton(){
+        const addListButton = document.getElementById("add-list-button");
+        addListButton.style.pointerEvents = "auto";
+        addListButton.style.color = "#e9edf0";
+    }
+
+    /**
+     * Disables the undo button
+     * @author Taylor Ngo
+     */
+    disableUndoButton(){
+        const undoButton = document.getElementById("undo-button");
+        undoButton.style.pointerEvents = "none";
+        undoButton.style.color = "#322d2d";
+    }
+
+    /**
+     * Enables the undo button
+     * @author Taylor
+     */
+    enableUndoButton(){
+        const undoButton = document.getElementById("undo-button");
+        undoButton.style.pointerEvents = "auto";
+        undoButton.style.color = "#e9edf0";
+    }
+
+        /**
+     * Disables the redo button
+     * @author Taylor Ngo
+     */
+    disableRedoButton(){
+        const undoButton = document.getElementById("redo-button");
+        undoButton.style.pointerEvents = "none";
+        undoButton.style.color = "#322d2d";
+    }
+
+    /**
+     * Enables the redo button
+     * @author Taylor
+     */
+    enableRedoButton(){
+        const undoButton = document.getElementById("redo-button");
+        undoButton.style.pointerEvents = "auto";
+        undoButton.style.color = "#e9edf0";
+    }
+
+    /**
+     * Disables both redo and undo buttons
+     * @author Taylor Ngo
+     */
+    disableRedoAndUndoButton(){
+        this.disableRedoButton();
+        this.disableUndoButton();
+    }
 }

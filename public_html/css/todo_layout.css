@@ -27,9 +27,9 @@
     
 }
 
-#left-sidebar-controls {
-    text-align: right;
-}
+/* .left-sidebar-controls {
+    background-color: var(--swatch-primary);
+} */
 
 #workspace {
     grid-column: 2 span 1;
@@ -76,6 +76,7 @@
 .listTextName{
     margin-top: 10%;
     margin-bottom: 10%;
+    background-color: var(--swatch-complement);
 }
 
 #modal-overlay{

@@ -13,7 +13,7 @@ export default class DeleteItem_Transaction extends jsTPS_Transaction {
         this.listId = listId;
     }
 
-    doTransaction() {
+    doTransaction() {        
         this.removedStuff = this.model.removeItemFromList(new ToDoListItem(this.itemId));
     }
 

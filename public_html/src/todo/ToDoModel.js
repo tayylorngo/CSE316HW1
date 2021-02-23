@@ -159,6 +159,8 @@ export default class ToDoModel {
             this.enableDeleteItemButtons();
         }
         this.tps.clearAllTransactions();
+        this.view.disableAddListButton();
+        this.view.disableRedoAndUndoButton();
     }
 
     /**
@@ -188,6 +190,7 @@ export default class ToDoModel {
         if (this.tps.hasTransactionToRedo()) {
             this.tps.doTransaction();
         }
+        this.performTransaction();
     }   
 
     /**
@@ -204,11 +207,7 @@ export default class ToDoModel {
      */
     removeItemFromList(itemToRemove) {
         let removedStuff = [];
-        // for(let i = 0; i < this.toDoLists.length; i++){
-        //     if(listId === this.toDoLists[i].id){
         removedStuff = this.currentList.removeItem(itemToRemove);
-        //     }
-        // }
         this.view.viewList(this.currentList);
         this.enableDeleteItemButtons();
         return removedStuff;
@@ -242,6 +241,7 @@ export default class ToDoModel {
         if (this.tps.hasTransactionToUndo()) {
             this.tps.undoTransaction();
         }
+        this.performTransaction();
     }
     
     /**
@@ -251,6 +251,7 @@ export default class ToDoModel {
     closeList(){
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+        this.view.enableAddListButton();
     }
 
     /**
@@ -265,7 +266,29 @@ export default class ToDoModel {
                 let itemId = deleteButtons[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
                 this.deleteItemTransaction(itemId, this.currentList.id);
-            }
+                this.performTransaction();
+                }
+        }
+    }
+
+    /**
+     * Checks whether there are transactions
+     * and enables the undo/redo buttons accordingly
+     * 
+     * @author Taylor Ngo
+     */
+    performTransaction(){
+        if(this.tps.hasTransactionToRedo()){
+            this.view.enableRedoButton();
+        }
+        else{
+            this.view.disableRedoButton();
+        }
+        if(this.tps.hasTransactionToUndo()){
+            this.view.enableUndoButton();
+        }
+        else{
+            this.view.disableUndoButton();
         }
     }
 }

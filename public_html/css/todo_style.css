@@ -68,7 +68,7 @@
 
 .todo_button {
     cursor:pointer;
-    background-color: var(--swatch-complement);
+    background-color: var(--swatch-primary);
 }
 
 .todo_button:hover {
