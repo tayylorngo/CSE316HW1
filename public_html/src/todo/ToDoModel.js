@@ -85,8 +85,13 @@ export default class ToDoModel {
      * 
      * Adds item at specific index
      */
-    addItemAtIndex(item, index){
-        this.currentList.addItemAtIndex(item, index);
+    addItemAtIndex(item, index, id){
+        for(let i = 0; i < this.toDoLists.length; i++){
+            if(id === this.toDoLists[i].id){
+                this.toDoLists[i].addItemAtIndex(item, index);
+            }
+        }
+        // this.toDoLists[id].addItemAtIndex(item, index);
         this.view.viewList(this.currentList);
     }
 
@@ -130,8 +135,8 @@ export default class ToDoModel {
         this.addItemToList(list, newItem);
     }
 
-    deleteItemTransaction(itemId){
-        let transaction = new DeleteItem_Transaction(this, itemId);
+    deleteItemTransaction(itemId, listId){
+        let transaction = new DeleteItem_Transaction(this, itemId, listId);
         this.tps.addTransaction(transaction);
     } 
 
@@ -186,8 +191,13 @@ export default class ToDoModel {
     /**
      * Remove the itemToRemove from the current list and refresh.
      */
-    removeItem(itemToRemove) {
-        let removedStuff = this.currentList.removeItem(itemToRemove);
+    removeItem(itemToRemove, listId) {
+        let removedStuff = [];
+        for(let i = 0; i < this.toDoLists.length; i++){
+            if(listId === this.toDoLists[i].id){
+                removedStuff = this.toDoLists[i].removeItem(itemToRemove);
+            }
+        }
         this.view.viewList(this.currentList);
         this.enableDeleteItemButtons();
         return removedStuff;
@@ -243,7 +253,7 @@ export default class ToDoModel {
             deleteButtons[i].onmousedown = () => {
                 let itemId = deleteButtons[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
-                this.deleteItemTransaction(itemId);
+                this.deleteItemTransaction(itemId, this.currentList.id);
             }
         }
     }

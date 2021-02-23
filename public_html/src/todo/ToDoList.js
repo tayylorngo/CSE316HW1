@@ -62,7 +62,7 @@ export default class ToDoList {
         }
         let removedItem = this.items[indexOfItem];
         this.items.splice(indexOfItem, 1);
-        return [removedItem, indexOfItem];
+        return [removedItem, indexOfItem, this.id];
     }
 
     /**
