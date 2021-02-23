@@ -130,8 +130,8 @@ export default class ToDoModel {
         this.addItemToList(list, newItem);
     }
 
-    removeItemTransaction(item){
-        let transaction = new DeleteItem_Transaction(this, item);
+    deleteItemTransaction(itemId){
+        let transaction = new DeleteItem_Transaction(this, itemId);
         this.tps.addTransaction(transaction);
     } 
 
@@ -152,7 +152,6 @@ export default class ToDoModel {
             this.view.viewList(this.currentList);
             this.enableDeleteItemButtons();
         }
-
     }
 
     /**
@@ -188,10 +187,9 @@ export default class ToDoModel {
      * Remove the itemToRemove from the current list and refresh.
      */
     removeItem(itemToRemove) {
-        const removedItem = this.currentList.removeItem(itemToRemove);
+        this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
         this.enableDeleteItemButtons();
-        return removedItem;
     }
 
     /**
@@ -242,7 +240,9 @@ export default class ToDoModel {
         const deleteButtons = document.getElementsByClassName("deleteItemButton");
         for(let i = 0; i < deleteButtons.length; i++){
             deleteButtons[i].onmousedown = () => {
-                this.addNewItemTransaction();
+                let itemId = deleteButtons[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                this.deleteItemTransaction(itemId);
             }
         }
     }

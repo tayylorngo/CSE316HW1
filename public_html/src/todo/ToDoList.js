@@ -13,7 +13,7 @@ export default class ToDoList {
      */
     constructor(initId) {
         this.id = initId;
-        this.name = "Unnknown";
+        this.name = "Unknown";
         this.items = [];
     }   
     
@@ -48,13 +48,11 @@ export default class ToDoList {
     removeItem(itemToRemove) {
         let indexOfItem = -1;
         for (let i = 0; (i < this.items.length) && (indexOfItem < 0); i++) {
-            if (this.items[i].id === itemToRemove.id) {
+            if (this.items[i].id === Number(itemToRemove.id)) {
                 indexOfItem = i;
             }
         }
-        // const removedItem = this.items[indexOfItem];
         this.items.splice(indexOfItem, 1);
-        // return [removedItem, indexOfItem];
     }
 
     /**
