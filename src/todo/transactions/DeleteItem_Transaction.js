@@ -6,11 +6,10 @@ import ToDoListItem from "../ToDoListItem.js";
 
 // THIS TRANSACTION IS FOR DELETING AN ITEM IN A TODO LIST
 export default class DeleteItem_Transaction extends jsTPS_Transaction {
-    constructor(initModel, itemId, listId) {
+    constructor(initModel, itemId) {
         super();
         this.model = initModel;
         this.itemId = itemId;
-        this.listId = listId;
     }
 
     doTransaction() {        

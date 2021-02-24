@@ -88,4 +88,38 @@ export default class ToDoList {
     getItemAtIndex(index) {
         return this.items[index];
     }
+
+    /**
+     * Moves the item up with a certain id
+     * @author Taylor Ngo
+     */
+    moveItemUp(itemId){
+        let index = -1;
+        for(let i = 0; i < this.items.length; i++){
+            if(this.items[i].id === Number(itemId)){
+                index = i;
+                break;
+            }
+        }
+        let tempItem = this.items[index - 1];
+        this.items[index - 1] = this.items[index];
+        this.items[index] = tempItem;
+    }
+
+    /**
+     * Moves the item down with a certain id
+     * @author Taylor Ngo
+     */
+    moveItemDown(itemId){
+        let index = -1;
+        for(let i = 0; i < this.items.length; i++){
+            if(this.items[i].id === Number(itemId)){
+                index = i;
+                break;
+            }
+        }
+        let tempItem = this.items[index + 1];
+        this.items[index + 1] = this.items[index];
+        this.items[index] = tempItem;
+    }
 }

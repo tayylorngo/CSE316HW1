@@ -5,6 +5,8 @@ import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
+import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction.js'
+import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction.js'
 
 /**
  * ToDoModel
@@ -120,7 +122,7 @@ export default class ToDoModel {
         let newItem = new ToDoListItem(this.nextListItemId++);
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
-        this.enableDeleteItemButtons();
+        this.enableItemControls();
         return newItem;
     }
 
@@ -136,10 +138,36 @@ export default class ToDoModel {
         this.addItemToList(list, newItem);
     }
 
-    deleteItemTransaction(itemId, listId){
-        let transaction = new DeleteItem_Transaction(this, itemId, listId);
+    /**
+     * Delete an item in the list
+     * 
+     * @param {} itemId  The item id to delete
+     * @author Taylor Ngo
+     */
+    deleteItemTransaction(itemId){
+        let transaction = new DeleteItem_Transaction(this, itemId);
         this.tps.addTransaction(transaction);
     } 
+
+    /**
+     * Moves an item up in the list
+     * @param {} itemId The item id to move up
+     * @author Taylor Ngo
+     */
+    moveItemUpTransaction(itemId){
+        let transaction = new MoveItemUp_Transaction(this, itemId);
+        this.tps.addTransaction(transaction);
+    }
+
+    /**
+     * Moves an item down in the list
+     * @param {*} itemId The item id to move down
+     * @author Taylor Ngo
+     */
+    moveItemDownTransaction(itemId){
+        let transaction = new MoveItemDown_Transaction(this, itemId);
+        this.tps.addTransaction(transaction);
+    }
 
     /**
      * Load the items for the listId list into the UI.
@@ -156,7 +184,7 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
-            this.enableDeleteItemButtons();
+            this.enableItemControls();
         }
         this.tps.clearAllTransactions();
         this.view.disableAddListButton();
@@ -209,8 +237,30 @@ export default class ToDoModel {
         let removedStuff = [];
         removedStuff = this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
-        this.enableDeleteItemButtons();
+        this.enableItemControls();
         return removedStuff;
+    }
+
+    /**
+     * Moves the item up
+     * @param {} itemId 
+     * @author Taylor Ngo
+     */
+    moveItemUp(itemId){
+        this.currentList.moveItemUp(itemId);
+        this.view.viewList(this.currentList);
+        this.enableItemControls();
+    }
+
+    /**
+     * Moves the item down
+     * @param {} itemId 
+     * @author Taylor Ngo
+     */
+    moveItemDown(itemId){
+        this.currentList.moveItemDown(itemId);
+        this.view.viewList(this.currentList);
+        this.enableItemControls();
     }
 
     /**
@@ -265,10 +315,55 @@ export default class ToDoModel {
             deleteButtons[i].onmousedown = () => {
                 let itemId = deleteButtons[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
-                this.deleteItemTransaction(itemId, this.currentList.id);
+                this.deleteItemTransaction(itemId);
                 this.performTransaction();
-                }
+            }
         }
+    }
+
+    /**
+     * Gives onmousedown function to the moveup item buttons
+     * @author Taylor Ngo
+     */
+    enableMoveItemUpButtons(){
+        const moveItemUpButtons = document.getElementsByClassName("moveItemUpButton");
+        moveItemUpButtons[0].style.color = "#353a44";
+        for(let i = 1; i < moveItemUpButtons.length; i++){
+            moveItemUpButtons[i].onmousedown = () => {
+                let itemId = moveItemUpButtons[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                this.moveItemUpTransaction(itemId);
+                this.performTransaction();
+            }
+        }
+    }
+
+    /**
+     * Gives onmousedown function to the movedown item buttons
+     * @author Taylor Ngo
+     */
+    enableMoveItemDownButtons(){
+        const moveItemDownButtons = document.getElementsByClassName("moveItemDownButton");
+        moveItemDownButtons[moveItemDownButtons.length - 1].style.color = "#353a44";
+        for(let i = 0; i < moveItemDownButtons.length - 1; i++){
+            moveItemDownButtons[i].onmousedown = () => {
+                let itemId = moveItemDownButtons[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                this.moveItemDownTransaction(itemId);
+                this.performTransaction();
+            }
+        }
+    }
+
+    /**
+     * Enable all item controls
+     * @author Taylor Ngo
+     * 
+     */
+    enableItemControls(){
+        this.enableMoveItemUpButtons();
+        this.enableMoveItemDownButtons();
+        this.enableDeleteItemButtons();
     }
 
     /**
