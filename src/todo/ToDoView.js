@@ -95,7 +95,7 @@ export default class ToDoView {
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
                                 + "<div class='task-col'> <h4 class='listItemName' id='list-item-name-" + listItem.id + "'>" + listItem.description + "</h4></div>"
                                 + "<div class='due-date-col'> <h4 class='listItemDate'>" + listItem.dueDate + "</h4></div>"
-                                + "<div class='status-col'>" + listItem.status + "</div>"
+                                + "<div class='status-col'> <h4 class='listItemStatus'>" + listItem.status + "</h4></div>"
                                 + "<div class='list-controls-col'>"
                                 + " <div class='list-item-control material-icons moveItemUpButton'>keyboard_arrow_up</div>"
                                 + " <div class='list-item-control material-icons moveItemDownButton'>keyboard_arrow_down</div>"
@@ -119,9 +119,24 @@ export default class ToDoView {
             dateChangeInput.setAttribute("type", "date");
             dateChangeInput.style.display = "none";
             document.getElementById("todo-list-item-" + listItem.id).children[1].appendChild(dateChangeInput);
+
+            // CREATES COMPLETE/INCOMPLETE FORM
+            let completionForm = document.createElement("select");
+            completionForm.setAttribute("class", "itemCompletionForm");
+            completionForm.setAttribute("id", "todo-list-itemCompletion-form-" + listItem.id);
+            let option1 = document.createElement("option");
+            option1.setAttribute("value", "complete");
+            option1.innerHTML = option1.value;
+            let option2 = document.createElement("option");
+            option2.setAttribute("value", "incomplete");
+            option2.innerHTML = option2.value;
+            completionForm.appendChild(option1);            
+            completionForm.appendChild(option2);
+            completionForm.style.display = "none";
+            document.getElementById("todo-list-item-" + listItem.id).children[2].appendChild(completionForm);
         }
         // CHANGES COLOR OF THE COMPLETE/INCOMPLETE ITEMS
-        const status = document.getElementsByClassName("status-col");
+        const status = document.getElementsByClassName("listItemStatus");
         for(let i = 0; i < status.length; i++){
             if(status[i].innerHTML === "complete"){
                status[i].style.color = "#8ed4f8";     

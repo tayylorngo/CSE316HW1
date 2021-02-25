@@ -9,6 +9,7 @@ import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction.js'
 import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction.js'
 import EditItemName_Transaction from './transactions/EditItemName_Transaction.js'
 import EditItemDate_Transaction from './transactions/EditItemDate_Transaction.js'
+import EditItemStatus_Transaction from './transactions/EditItemStatus_Transaction.js'
 
 /**
  * ToDoModel
@@ -187,9 +188,21 @@ export default class ToDoModel {
      * Edits an item's date
      * @param {} itemId the item id to change the date
      * @param {*} newDate 
+     * @author Taylor Ngo
      */
     editDateTransaction(itemId, newDate){
         let transaction = new EditItemDate_Transaction(this, itemId, newDate);
+        this.tps.addTransaction(transaction);
+    }
+
+    /**
+     * Edits an item's status
+     * @param {} itemId 
+     * @param {*} newStatus 
+     * @author Taylor Ngo
+     */
+    editStatusTransaction(itemId, newStatus){
+        let transaction = new EditItemStatus_Transaction(this, itemId, newStatus);
         this.tps.addTransaction(transaction);
     }
 
@@ -311,6 +324,18 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
         this.enableItemControls();
         return oldDate;
+    }
+
+    /**
+     * Edits and item's status
+     * @param {*} itemId the item id
+     * @param {*} newStatus the new status to set to
+     */
+    editItemStatus(itemId, newStatus){
+        let oldStatus = this.currentList.editItemStatus(itemId, newStatus);
+        this.view.viewList(this.currentList);
+        this.enableItemControls();
+        return oldStatus;
     }
 
     /**
@@ -468,7 +493,27 @@ export default class ToDoModel {
                 }
             }
         }
+    }
 
+    setUpStatusForm(){
+        let itemStatus = document.getElementsByClassName("listItemStatus");
+        for(let i = 0; i < itemStatus.length; i++){
+            itemStatus[i].onclick = () => {
+                itemStatus[i].style.display = "none";
+                let itemId = itemStatus[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                let itemStatusForm = document.getElementById("todo-list-itemCompletion-form-" + itemId);
+                itemStatusForm.value = itemStatus[i].innerHTML;
+                itemStatusForm.style.display = "block";
+                itemStatusForm.focus();
+                itemStatusForm.onblur = () => {
+                    itemStatus[i].style.display = "block";
+                    itemStatusForm.style.display = "none";
+                    this.editStatusTransaction(itemId, itemStatusForm.value);
+                    this.performTransaction();
+                }
+            }
+        }
     }
 
     /**
@@ -482,6 +527,7 @@ export default class ToDoModel {
         this.enableDeleteItemButtons();
         this.setUpNameChangeForm();
         this.setUpDateChangeForm();
+        this.setUpStatusForm();
     }
 
     /**

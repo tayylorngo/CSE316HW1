@@ -133,7 +133,7 @@ export default class ToDoList {
         let oldName;
         for(let i = 0; i < this.items.length; i++){
             if(this.items[i].id === Number(itemId)){
-                oldName = this.items[i].description;
+                oldName = this.items[i].getDescription();
                 this.items[i].setDescription(newName);
                 break;
             }
@@ -151,11 +151,29 @@ export default class ToDoList {
         let oldDate;
         for(let i = 0; i < this.items.length; i++){
             if(this.items[i].id === Number(itemId)){
-                oldDate = this.items[i].dueDate;
+                oldDate = this.items[i].getDueDate();
                 this.items[i].setDueDate(newDate);
                 break;
             }
         }
         return oldDate;
+    }
+
+    /**
+     * Edits an item's status with a certain id
+     * @param {} itemId 
+     * @param {*} newStatus 
+     * @author Taylor Ngo
+     */
+    editItemStatus(itemId, newStatus){
+        let oldStatus;
+        for(let i = 0; i < this.items.length; i++){
+            if(this.items[i].id === Number(itemId)){
+                oldStatus = this.items[i].getStatus();
+                this.items[i].setStatus(newStatus);
+                break;
+            }
+        }
+        return oldStatus;
     }
 }
