@@ -8,6 +8,7 @@ import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction.js'
 import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction.js'
 import EditItemName_Transaction from './transactions/EditItemName_Transaction.js'
+import EditItemDate_Transaction from './transactions/EditItemDate_Transaction.js'
 
 /**
  * ToDoModel
@@ -174,6 +175,7 @@ export default class ToDoModel {
      * Edits an item's name
      * 
      * @param {*} itemId  the item id to change name
+     * @param {*} newName the new name to be set
      * @author Taylor Ngo
      */
     editItemNameTransaction(itemId, newName){
@@ -181,6 +183,15 @@ export default class ToDoModel {
         this.tps.addTransaction(transaction);
     }
 
+    /**
+     * Edits an item's date
+     * @param {} itemId the item id to change the date
+     * @param {*} newDate 
+     */
+    editDateTransaction(itemId, newDate){
+        let transaction = new EditItemDate_Transaction(this, itemId, newDate);
+        this.tps.addTransaction(transaction);
+    }
 
     /**
      * Load the items for the listId list into the UI.
@@ -287,6 +298,19 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
         this.enableItemControls();
         return oldName;
+    }
+
+    /**
+     * Edits an item's date
+     * @param {} itemId the item id
+     * @param {*} newDate the new date to set to
+     * @author Taylor Ngo
+     */
+    editItemDate(itemId, newDate){
+        let oldDate = this.currentList.editItemDate(itemId, newDate);
+        this.view.viewList(this.currentList);
+        this.enableItemControls();
+        return oldDate;
     }
 
     /**
@@ -422,6 +446,32 @@ export default class ToDoModel {
     }
 
     /**
+     * Sets up the date change form
+     * @author Taylor Ngo
+     */
+    setUpDateChangeForm(){
+        let itemDates = document.getElementsByClassName("listItemDate");
+        for(let i = 0; i < itemDates.length; i++){
+            itemDates[i].onclick = () => {
+                itemDates[i].style.display = "none";
+                let itemId = itemDates[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                let itemDateForm = document.getElementById("todo-list-itemDate-form-" + itemId);
+                itemDateForm.value = itemDates[i].innerHTML;
+                itemDateForm.style.display = "block";
+                itemDateForm.focus();
+                itemDateForm.onblur = () => {
+                    itemDates[i].style.display = "block";
+                    itemDateForm.style.display = "none";
+                    this.editDateTransaction(itemId, itemDateForm.value);
+                    this.performTransaction();
+                }
+            }
+        }
+
+    }
+
+    /**
      * Enable all item controls
      * @author Taylor Ngo
      * 
@@ -431,6 +481,7 @@ export default class ToDoModel {
         this.enableMoveItemDownButtons();
         this.enableDeleteItemButtons();
         this.setUpNameChangeForm();
+        this.setUpDateChangeForm();
     }
 
     /**

@@ -94,7 +94,7 @@ export default class ToDoView {
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
                                 + "<div class='task-col'> <h4 class='listItemName' id='list-item-name-" + listItem.id + "'>" + listItem.description + "</h4></div>"
-                                + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
+                                + "<div class='due-date-col'> <h4 class='listItemDate'>" + listItem.dueDate + "</h4></div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"
                                 + " <div class='list-item-control material-icons moveItemUpButton'>keyboard_arrow_up</div>"

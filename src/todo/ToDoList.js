@@ -140,4 +140,22 @@ export default class ToDoList {
         }
         return oldName;
     }
+
+    /**
+     * Edits an item's date with a certain id
+     * @param {} itemId 
+     * @param {*} newDate
+     * @author Taylor Ngo 
+     */
+    editItemDate(itemId, newDate){
+        let oldDate;
+        for(let i = 0; i < this.items.length; i++){
+            if(this.items[i].id === Number(itemId)){
+                oldDate = this.items[i].dueDate;
+                this.items[i].setDueDate(newDate);
+                break;
+            }
+        }
+        return oldDate;
+    }
 }
