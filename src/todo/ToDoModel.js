@@ -91,12 +91,7 @@ export default class ToDoModel {
      * Adds item at specific index to a certain list
      */
     addItemAtIndex(item, index){
-        // for(let i = 0; i < this.toDoLists.length; i++){
-        //     if(id === this.toDoLists[i].id){
-                this.currentList.addItemAtIndex(item, index);
-        //     }
-        // }
-        // this.toDoLists[id].addItemAtIndex(item, index);
+        this.currentList.addItemAtIndex(item, index);
         this.view.viewList(this.currentList);
         this.enableItemControls();
     }
@@ -121,8 +116,11 @@ export default class ToDoModel {
     /**
      * Adds a brand new default item to the current list's items list and refreshes the view.
      */
-    addNewItem() {
-        let newItem = new ToDoListItem(this.nextListItemId++);
+    addNewItem(itemId) {
+        if(!itemId){
+            itemId = this.nextListItemId++;
+        }
+        let newItem = new ToDoListItem(itemId);
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
         this.enableItemControls();
@@ -264,6 +262,7 @@ export default class ToDoModel {
     removeItem(itemToRemove) {
         this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
+        this.enableItemControls();
     }
 
     /**

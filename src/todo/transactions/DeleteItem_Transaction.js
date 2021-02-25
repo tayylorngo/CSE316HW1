@@ -17,7 +17,6 @@ export default class DeleteItem_Transaction extends jsTPS_Transaction {
     }
 
     undoTransaction() {
-        // console.log(this.removedStuff);
         this.model.addItemAtIndex(this.removedStuff[0], this.removedStuff[1]);
     }
 }
