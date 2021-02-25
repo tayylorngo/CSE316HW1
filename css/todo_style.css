@@ -16,8 +16,10 @@
     --font-primary:         'Consolas', sans-serif;
 }
 
-body{
+html, body{
     overflow-x: hidden;
+    margin: 0;
+    height: 100%;
 }
 
 #grid-container {
@@ -41,6 +43,7 @@ body{
 #workspace {
     background-color: var(--swatch-primary);
     color: rgb(233,237,240);
+    overflow-y:scroll; 
 }
 
 #title-div {
