@@ -23,9 +23,9 @@
     grid-template-columns: 60% 40%;
 }
 
-#left-sidebar-header-text {
+/* #left-sidebar-header-text {
     
-}
+} */
 
 /* .left-sidebar-controls {
     background-color: var(--swatch-primary);
@@ -39,8 +39,7 @@
 }
 
 #todo-list-items-div{
-    /* height: 20%; */
-    display: flex;
+    display: grid;
     flex-direction: column;
 }
 
@@ -78,6 +77,19 @@
     margin-bottom: 10%;
     background-color: var(--swatch-complement);
 }
+
+.listItemName{
+    margin-top: 6%;
+}
+
+.listItemDate{
+    margin-top: 6%;
+}
+
+.listItemStatus{
+    margin-top: 6%;
+}
+
 
 #modal-overlay{
     display: none;
