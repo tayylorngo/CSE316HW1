@@ -104,12 +104,21 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
             itemsListDiv.innerHTML += listItemElement;
+
+            // CREATES EDIT NAME FORM
             let listNameChangeInput = document.createElement("input");
-            // FOR STYLING PURPOSES
             listNameChangeInput.setAttribute("class", "itemNameChangeForm");
             listNameChangeInput.setAttribute("id", "todo-list-itemName-form-" + listItem.id);
             listNameChangeInput.style.display = "none";
             document.getElementById("todo-list-item-" + listItem.id).children[0].appendChild(listNameChangeInput);
+
+            // CREATES EDIT DATE FORM
+            let dateChangeInput = document.createElement("input");
+            dateChangeInput.setAttribute("class", "itemDateChangeForm");
+            dateChangeInput.setAttribute("id", "todo-list-itemDate-form-" + listItem.id);
+            dateChangeInput.setAttribute("type", "date");
+            dateChangeInput.style.display = "none";
+            document.getElementById("todo-list-item-" + listItem.id).children[1].appendChild(dateChangeInput);
         }
         // CHANGES COLOR OF THE COMPLETE/INCOMPLETE ITEMS
         const status = document.getElementsByClassName("status-col");
