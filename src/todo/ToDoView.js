@@ -38,9 +38,22 @@ export default class ToDoView {
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onmousedown = function() {
-            thisController.handleLoadList(newList.id);
-            document.getElementById(newListId).style.color = "#ffc800";
+        listElement.onclick = event => {
+            if(event.detail === 1){
+                thisController.handleLoadList(newList.id);
+                document.getElementById(newListId).style.color = "#ffc800";
+            }
+            else if(event.detail === 2){
+                listNameText.style.display = "none";
+                listNameChangeInput.style.display = "block";
+                listNameChangeInput.value = listNameText.innerHTML;
+                listNameChangeInput.focus();
+                listNameChangeInput.onblur = function(){
+                    thisController.handleListNameChange(newList.id, listNameChangeInput.value);
+                    listNameText.style.display = "block";
+                    listNameChangeInput.style.display = "none";
+                }
+            }
         }
     }
 
@@ -80,7 +93,7 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div contenteditable class='task-col'>" + listItem.description + "</div>"
+                                + "<div class='task-col'> <h4 class='listItemName' id='list-item-name-" + listItem.id + "'>" + listItem.description + "</h4></div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"
@@ -91,16 +104,21 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
             itemsListDiv.innerHTML += listItemElement;
-
-            // CHANGES COLOR OF THE COMPLETE/INCOMPLETE ITEMS
-            const status = document.getElementsByClassName("status-col");
-            for(let i = 0; i < status.length; i++){
-                if(status[i].innerHTML === "complete"){
-                   status[i].style.color = "#8ed4f8";     
-                }
-                else if(status[i].innerHTML === "incomplete"){
-                    status[i].style.color = "#f5bc75";     
-                }
+            let listNameChangeInput = document.createElement("input");
+            // FOR STYLING PURPOSES
+            listNameChangeInput.setAttribute("class", "itemNameChangeForm");
+            listNameChangeInput.setAttribute("id", "todo-list-itemName-form-" + listItem.id);
+            listNameChangeInput.style.display = "none";
+            document.getElementById("todo-list-item-" + listItem.id).children[0].appendChild(listNameChangeInput);
+        }
+        // CHANGES COLOR OF THE COMPLETE/INCOMPLETE ITEMS
+        const status = document.getElementsByClassName("status-col");
+        for(let i = 0; i < status.length; i++){
+            if(status[i].innerHTML === "complete"){
+               status[i].style.color = "#8ed4f8";     
+            }
+            else if(status[i].innerHTML === "incomplete"){
+                status[i].style.color = "#f5bc75";     
             }
         }
         this.enableListItems();

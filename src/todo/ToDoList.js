@@ -122,4 +122,22 @@ export default class ToDoList {
         this.items[index + 1] = this.items[index];
         this.items[index] = tempItem;
     }
+
+    /**
+     * Edits an item name with a certain id
+     * @param {} itemId 
+     * @param {*} newName 
+     * @author Taylor Ngo
+     */
+    editItemName(itemId, newName){
+        let oldName;
+        for(let i = 0; i < this.items.length; i++){
+            if(this.items[i].id === Number(itemId)){
+                oldName = this.items[i].description;
+                this.items[i].setDescription(newName);
+                break;
+            }
+        }
+        return oldName;
+    }
 }

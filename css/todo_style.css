@@ -16,6 +16,10 @@
     --font-primary:         'Consolas', sans-serif;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 #grid-container {
     background-color: var(--swatch-foundation);
     font-family: var(--font-primary);
@@ -56,6 +60,9 @@
 #todo-lists-list{
     background-color: var(--swatch-complement);
     /* align-items: center; */
+    overflow-y:scroll; 
+    /* overflow-x:hidden; */
+    height:95%;
 }
 
 .list-header-card {
@@ -83,4 +90,8 @@
 #redo-button{
     pointer-events: none;
     color: rgb(50, 45, 45);
+}
+
+#todo-list-header-card{
+    border-bottom: dotted;
 }

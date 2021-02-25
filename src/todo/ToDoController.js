@@ -45,4 +45,8 @@ export default class ToDoController {
         // UNLOAD THE CURRENT LIST AND INSTEAD LOAD THE CURRENT LIST
         this.model.loadList(listId);
     }
+
+    handleListNameChange(newListId, newName){
+        this.model.changeListName(newListId, newName);
+    }
 }

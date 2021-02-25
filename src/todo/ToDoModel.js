@@ -7,6 +7,7 @@ import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction.js'
 import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction.js'
+import EditItemName_Transaction from './transactions/EditItemName_Transaction.js'
 
 /**
  * ToDoModel
@@ -95,7 +96,7 @@ export default class ToDoModel {
         // }
         // this.toDoLists[id].addItemAtIndex(item, index);
         this.view.viewList(this.currentList);
-        this.enableDeleteItemButtons();
+        this.enableItemControls();
     }
 
     /**
@@ -168,6 +169,18 @@ export default class ToDoModel {
         let transaction = new MoveItemDown_Transaction(this, itemId);
         this.tps.addTransaction(transaction);
     }
+
+    /**
+     * Edits an item's name
+     * 
+     * @param {*} itemId  the item id to change name
+     * @author Taylor Ngo
+     */
+    editItemNameTransaction(itemId, newName){
+        let transaction = new EditItemName_Transaction(this, itemId, newName);
+        this.tps.addTransaction(transaction);
+    }
+
 
     /**
      * Load the items for the listId list into the UI.
@@ -264,6 +277,19 @@ export default class ToDoModel {
     }
 
     /**
+     * Edits an item's name
+     * @param {} itemId the item id
+     * @param {*} newName the new name to set to
+     * @author Taylor Ngo
+     */
+    editItemName(itemId, newName){
+        let oldName = this.currentList.editItemName(itemId, newName);
+        this.view.viewList(this.currentList);
+        this.enableItemControls();
+        return oldName;
+    }
+
+    /**
      * Finds and then removes the current list.
      */
     removeCurrentList() {
@@ -302,6 +328,21 @@ export default class ToDoModel {
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
         this.view.enableAddListButton();
+    }
+
+    /**
+     * Changes list name
+     * @param {*} listId the list id to change
+     * @param {*} newName the new name to change to
+     */
+    changeListName(listId, newName){
+        for(let i = 0; i < this.toDoLists.length; i++){
+            if(this.toDoLists[i].id === Number(listId)){
+                this.toDoLists[i].setName(newName);
+                break;
+            }
+        }
+        this.view.refreshLists(this.toDoLists);
     }
 
     /**
@@ -356,6 +397,31 @@ export default class ToDoModel {
     }
 
     /**
+     * Sets up the name change form
+     * @author Taylor Ngo
+     */
+    setUpNameChangeForm(){
+        let itemNameTexts = document.getElementsByClassName("listItemName");
+        for(let i = 0; i < itemNameTexts.length; i++){
+            itemNameTexts[i].onclick = () => {
+                itemNameTexts[i].style.display = "none";
+                let itemId = itemNameTexts[i].parentNode.parentNode.id;
+                itemId = itemId.substring(15);
+                let itemNameForm = document.getElementById("todo-list-itemName-form-" + itemId);
+                itemNameForm.value = itemNameTexts[i].innerHTML;
+                itemNameForm.style.display = "block";
+                itemNameForm.focus();
+                itemNameForm.onblur = () => {
+                    itemNameTexts[i].style.display = "block";
+                    itemNameForm.style.display = "none";
+                    this.editItemNameTransaction(itemId, itemNameForm.value);
+                    this.performTransaction();
+                }
+            }
+        }
+    }
+
+    /**
      * Enable all item controls
      * @author Taylor Ngo
      * 
@@ -364,6 +430,7 @@ export default class ToDoModel {
         this.enableMoveItemUpButtons();
         this.enableMoveItemDownButtons();
         this.enableDeleteItemButtons();
+        this.setUpNameChangeForm();
     }
 
     /**
