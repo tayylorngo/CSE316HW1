@@ -9,8 +9,12 @@
 }
 
 #navbar {
+    margin-top: 2%;
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
+    margin-top: 0.5%;
+    height: 100%;
+    width: 99%;
 }
 
 #left-sidebar {
@@ -19,13 +23,25 @@
 }
 
 #left-sidebar-header {
+    margin-top: 6.5%;
     display: grid;
     grid-template-columns: 60% 40%;
+    background-color: var(--swatch-complement);
 }
 
-/* #left-sidebar-header-text {
-    
-} */
+#6-header-card{
+    margin-top: 1.05%;
+    /* margin-left: 2%; */
+}
+
+#left-sidebar-header-text {
+    background-color: var(--swatch-primary);
+}
+
+#add-undo-redo-box{
+    background-color: var(--swatch-complement);
+    margin-top: 15%;
+}
 
 /* .left-sidebar-controls {
     background-color: var(--swatch-primary);
@@ -72,12 +88,6 @@
     width: 20%;
 }
 
-.listTextName{
-    margin-top: 10%;
-    margin-bottom: 10%;
-    background-color: var(--swatch-complement);
-}
-
 .listItemName{
     margin-top: 6%;
 }
@@ -89,7 +99,6 @@
 .listItemStatus{
     margin-top: 6%;
 }
-
 
 #modal-overlay{
     display: none;
@@ -160,4 +169,24 @@
 .list-item-control{
     pointer-events: none;
     color: #322d2d;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

@@ -18,8 +18,10 @@
 
 html, body{
     overflow-x: hidden;
+    overflow-y: hidden;
     margin: 0;
     height: 100%;
+    background-color: #d9d6cc;
 }
 
 #grid-container {
@@ -33,40 +35,53 @@ html, body{
 
 #navbar {
     box-shadow: 2px 2px 2px var(--swatch-primary); 
+    margin-left: 0.5%;
 }
 
 #left-sidebar {
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
+    margin-left: 4%;
+    margin-bottom: 4%;
+    margin-top: 10%;
 }
 
 #workspace {
     background-color: var(--swatch-primary);
     color: rgb(233,237,240);
+    margin-bottom: 0.55%;
+    margin-right: 0.5%;
+    margin-top: 1.36%;
 }
 
 #title-div {
     color: rgb(255,200,25);
     font-weight: bold;
     font-size: 14pt;
+    margin: auto;
+}
+
+#title{
+    font-size: 1.4rem;
+    padding-left: 0.5%;
 }
 
 #left-sidebar-header {
     border-bottom: dotted;
+    border-width: 90%;
+    margin-left: 5%;
+    margin-right: 6%;
 }
 
 #todo-list-table-header {
     border-bottom: dotted;
+    border-width: 90%;
 }
 
 #todo-lists-list{
     background-color: var(--swatch-complement);
     overflow-y:scroll; 
     height:95%;
-}
-
-#todo-list-items-div{
-    overflow-y:scroll; 
 }
 
 .list-header-card {
@@ -80,16 +95,47 @@ html, body{
 
 .todo_button {
     cursor:pointer;
-    background-color: var(--swatch-primary);
+    padding-right: 2%;
 }
 
-.todo_button:hover {
-    background-color: var(--swatch-contrast);
+.listItemName{
+    cursor: pointer;
+}
+
+.listItemDate{
+    cursor: pointer;
+}
+
+.listItemStatus{
+    cursor: pointer;
+}
+
+.list-item{
+    text-align: center;
+    width: 100%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.list-item:hover{
+    background-color: #C3C4C7;
+}
+
+.list-item-button{
+    margin-top: 2%;
 }
 
 #undo-button{
     pointer-events: none;
     color: rgb(50, 45, 45);
+}
+
+#undo-button:hover{
+    background-color: #C3C4C7;
+}
+
+#redo-button:hover{
+    background-color: #C3C4C7;
 }
 
 #redo-button{
@@ -99,4 +145,33 @@ html, body{
 
 #todo-list-header-card{
     border-bottom: dotted;
+    margin-top: .9%;
+    margin-left: 1.5%;
+    /* overflow-y: hidden; */
+}
+
+#add-list-button{
+    margin: auto;
+}
+
+#add-list-button:hover{
+    background-color: #C3C4C7;
+}
+
+#add-item-button{
+    cursor: pointer;
+}
+
+#delete-list-button{
+    cursor: pointer;
+}
+
+#close-list-button{
+    cursor: pointer;
+}
+
+#workspace-div{
+    margin-left: 1.5%;
+    overflow-y: scroll;
+    background-color: var(--swatch-primary);
 }

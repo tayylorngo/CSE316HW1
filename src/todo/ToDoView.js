@@ -24,17 +24,20 @@ export default class ToDoView {
         listNameText.setAttribute("class", "listTextName");
         listNameText.setAttribute("id", "todo-list-text-" + newList.id);
 
-        // listElement.appendChild(document.createTextNode(newList.name));
-
         // CREATES FORM TO CHANGE LIST NAME
         let listNameChangeInput = document.createElement("input");
         listNameChangeInput.setAttribute("id", "todo-list-text-form-" + newList.id);
         listNameChangeInput.style.display = "none";
 
+        // CREATES OUTSIDE DIV
+        let listDiv = document.createElement("div");
+        listDiv.setAttribute("class", "list-item");
+
         listNameText.appendChild(document.createTextNode(newList.name));
         listElement.appendChild(listNameText);
         listElement.appendChild(listNameChangeInput);
-        listsElement.appendChild(listElement);
+        listDiv.appendChild(listElement);
+        listsElement.appendChild(listDiv);
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
@@ -52,6 +55,7 @@ export default class ToDoView {
                     thisController.handleListNameChange(newList.id, listNameChangeInput.value);
                     listNameText.style.display = "block";
                     listNameChangeInput.style.display = "none";
+                    document.getElementById(newListId).style.color = "#ffc800";
                 }
             }
         }
@@ -169,6 +173,7 @@ export default class ToDoView {
         for(let i = 0; i < listItems.length; i++){
             listItems[i].style.pointerEvents = "auto";
             listItems[i].style.color = "white";
+            listItems[i].style.cursor = "pointer";
         }
     }
 
