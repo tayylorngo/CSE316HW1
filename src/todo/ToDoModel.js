@@ -419,6 +419,7 @@ export default class ToDoModel {
     enableMoveItemUpButtons(){
         const moveItemUpButtons = document.getElementsByClassName("moveItemUpButton");
         moveItemUpButtons[0].style.color = "#353a44";
+        moveItemUpButtons[0].style.pointerEvents = "none";
         for(let i = 1; i < moveItemUpButtons.length; i++){
             moveItemUpButtons[i].onmousedown = () => {
                 let itemId = moveItemUpButtons[i].parentNode.parentNode.id;
@@ -436,6 +437,7 @@ export default class ToDoModel {
     enableMoveItemDownButtons(){
         const moveItemDownButtons = document.getElementsByClassName("moveItemDownButton");
         moveItemDownButtons[moveItemDownButtons.length - 1].style.color = "#353a44";
+        moveItemDownButtons[moveItemDownButtons.length - 1].style.pointerEvents = "none";
         for(let i = 0; i < moveItemDownButtons.length - 1; i++){
             moveItemDownButtons[i].onmousedown = () => {
                 let itemId = moveItemDownButtons[i].parentNode.parentNode.id;
@@ -455,6 +457,7 @@ export default class ToDoModel {
         for(let i = 0; i < itemNameTexts.length; i++){
             itemNameTexts[i].onclick = () => {
                 itemNameTexts[i].style.display = "none";
+                itemNameTexts[i].parentNode.style.background = "#4D5059";
                 let itemId = itemNameTexts[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
                 let itemNameForm = document.getElementById("todo-list-itemName-form-" + itemId);
@@ -463,6 +466,7 @@ export default class ToDoModel {
                 itemNameForm.focus();
                 itemNameForm.onblur = () => {
                     itemNameTexts[i].style.display = "block";
+                    itemNameTexts[i].parentNode.style.background = "auto";
                     itemNameForm.style.display = "none";
                     this.editItemNameTransaction(itemId, itemNameForm.value);
                     this.performTransaction();
@@ -480,6 +484,7 @@ export default class ToDoModel {
         for(let i = 0; i < itemDates.length; i++){
             itemDates[i].onclick = () => {
                 itemDates[i].style.display = "none";
+                itemDates[i].parentNode.style.background = "#4D5059";
                 let itemId = itemDates[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
                 let itemDateForm = document.getElementById("todo-list-itemDate-form-" + itemId);
@@ -489,6 +494,7 @@ export default class ToDoModel {
                 itemDateForm.onblur = () => {
                     itemDates[i].style.display = "block";
                     itemDateForm.style.display = "none";
+                    itemDates[i].parentNode.style.background = "auto";
                     let newDate = itemDateForm.value;
                     if(newDate === ""){
                         newDate = "No Date";
@@ -505,6 +511,7 @@ export default class ToDoModel {
         for(let i = 0; i < itemStatus.length; i++){
             itemStatus[i].onclick = () => {
                 itemStatus[i].style.display = "none";
+                itemStatus[i].parentNode.style.background = "#4D5059";
                 let itemId = itemStatus[i].parentNode.parentNode.id;
                 itemId = itemId.substring(15);
                 let itemStatusForm = document.getElementById("todo-list-itemCompletion-form-" + itemId);
@@ -514,6 +521,7 @@ export default class ToDoModel {
                 itemStatusForm.onblur = () => {
                     itemStatus[i].style.display = "block";
                     itemStatusForm.style.display = "none";
+                    itemStatus[i].parentNode.style.background = "auto";
                     this.editStatusTransaction(itemId, itemStatusForm.value);
                     this.performTransaction();
                 }

@@ -189,3 +189,33 @@ html, body{
 .add-item-button2:hover{
     background-color: #C3C4C7;
 }
+
+.itemNameChangeForm{
+    margin-top: 25px;
+    width: 80%;
+    height: 40%;
+    background-color: #4D5059;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.itemDateChangeForm{
+    margin-top: 25px;
+    width: 80%;
+    height: 40%;
+    background-color: #4D5059;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.itemCompletionForm{
+    margin-top: 25px;
+    width: 80%;
+    height: 40%;
+    background-color: #4D5059;
+    color: white;
+    border: none;
+    outline: none;
+}
