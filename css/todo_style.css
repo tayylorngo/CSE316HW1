@@ -35,23 +35,20 @@ html, body{
 
 #navbar {
     box-shadow: 2px 2px 2px var(--swatch-primary); 
-    margin-left: 0.5%;
+    /* height: 50%; */
 }
 
 #left-sidebar {
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
-    margin-left: 4%;
-    margin-bottom: 4%;
-    margin-top: 10%;
+    margin-bottom: 39.5%;
 }
 
 #workspace {
     background-color: var(--swatch-primary);
     color: rgb(233,237,240);
-    margin-bottom: 0.55%;
-    margin-right: 0.5%;
-    margin-top: 1.36%;
+    margin-bottom: 1.25%;
+    /* margin-right: 0.5%; */
 }
 
 #title-div {
@@ -62,7 +59,7 @@ html, body{
 }
 
 #title{
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     padding-left: 0.5%;
 }
 
@@ -81,7 +78,7 @@ html, body{
 #todo-lists-list{
     background-color: var(--swatch-complement);
     overflow-y:scroll; 
-    height:95%;
+    height:100%;
 }
 
 .list-header-card {
@@ -91,6 +88,10 @@ html, body{
 .list-item-card {
     border-bottom: solid;
     border-width: thin;
+}
+
+.list-item-card:hover{
+    background-color: #4D5059;
 }
 
 .todo_button {
@@ -128,6 +129,7 @@ html, body{
 #undo-button{
     pointer-events: none;
     color: rgb(50, 45, 45);
+    font-size: 1.25rem;
 }
 
 #undo-button:hover{
@@ -140,18 +142,26 @@ html, body{
 
 #redo-button{
     pointer-events: none;
+    font-size: 1.25rem;
     color: rgb(50, 45, 45);
 }
 
 #todo-list-header-card{
     border-bottom: dotted;
-    margin-top: .9%;
+    margin-top: 1.6%;
+    margin-right: 1%;
     margin-left: 1.5%;
-    /* overflow-y: hidden; */
+    display: flex;
+    flex-direction: row;
+}
+
+#todo-list-header-card:hover{
+    background-color: none;
 }
 
 #add-list-button{
     margin: auto;
+    font-size: 1.25rem;
 }
 
 #add-list-button:hover{
@@ -174,4 +184,8 @@ html, body{
     margin-left: 1.5%;
     overflow-y: scroll;
     background-color: var(--swatch-primary);
+}
+
+.add-item-button2:hover{
+    background-color: #C3C4C7;
 }

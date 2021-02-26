@@ -101,9 +101,9 @@ export default class ToDoView {
                                 + "<div class='due-date-col'> <h4 class='listItemDate'>" + listItem.dueDate + "</h4></div>"
                                 + "<div class='status-col'> <h4 class='listItemStatus'>" + listItem.status + "</h4></div>"
                                 + "<div class='list-controls-col'>"
-                                + " <div class='list-item-control material-icons moveItemUpButton'><h4>keyboard_arrow_up</h4></div>"
-                                + " <div class='list-item-control material-icons moveItemDownButton'><h4>keyboard_arrow_down</h4></div>"
-                                + " <div class='list-item-control material-icons deleteItemButton'><h4>close</h4></div>"
+                                + " <div class='list-item-control material-icons moveItemUpButton'><h4><span class='add-item-button2'>keyboard_arrow_up</span></h4></div>"
+                                + " <div class='list-item-control material-icons moveItemDownButton'><h4><span class='add-item-button2'>keyboard_arrow_down</span></h4></div>"
+                                + " <div class='list-item-control material-icons deleteItemButton'><h4><span class='add-item-button2'>close</span></h4></div>"
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";

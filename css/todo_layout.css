@@ -4,35 +4,35 @@
     height:100vh;
     display: grid;
     padding: 1px;
-    grid-template-rows: 5% 95%;
-    grid-template-columns: 12% 88%;
+    grid-template-rows: 7.5% 92.5%;
+    grid-template-columns: 15% 85%;
+    grid-row-gap: 10px;
 }
 
 #navbar {
-    margin-top: 2%;
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
     margin-top: 0.5%;
-    height: 100%;
+    margin-left: 0.4%;
     width: 99%;
 }
 
 #left-sidebar {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+    margin-left: 2.5%;
 }
 
 #left-sidebar-header {
-    margin-top: 6.5%;
+    margin-top: 9%;
     display: grid;
     grid-template-columns: 60% 40%;
     background-color: var(--swatch-complement);
 }
 
-#6-header-card{
+/* #6-header-card{
     margin-top: 1.05%;
-    /* margin-left: 2%; */
-}
+} */
 
 #left-sidebar-header-text {
     background-color: var(--swatch-primary);
@@ -40,18 +40,15 @@
 
 #add-undo-redo-box{
     background-color: var(--swatch-complement);
-    margin-top: 15%;
+    margin-top: 22.5%;
 }
-
-/* .left-sidebar-controls {
-    background-color: var(--swatch-primary);
-} */
 
 #workspace {
     grid-column: 2 span 1;
     grid-row: 2 span 1;
     display: flex;
     flex-direction: column;
+    margin-right: 0.55%;
 }
 
 #todo-list-items-div{
@@ -82,6 +79,7 @@
     width:25%;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .list-item-control {
@@ -89,15 +87,15 @@
 }
 
 .listItemName{
-    margin-top: 6%;
+    margin-top: 9.5%;
 }
 
 .listItemDate{
-    margin-top: 6%;
+    margin-top: 9.5%;
 }
 
 .listItemStatus{
-    margin-top: 6%;
+    margin-top: 9.5%;
 }
 
 #modal-overlay{

@@ -219,7 +219,9 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
-            this.enableItemControls();
+            if(this.toDoLists[listIndex].items.length > 0){
+                this.enableItemControls();
+            }
         }
         this.tps.clearAllTransactions();
         this.view.disableAddListButton();
@@ -487,7 +489,11 @@ export default class ToDoModel {
                 itemDateForm.onblur = () => {
                     itemDates[i].style.display = "block";
                     itemDateForm.style.display = "none";
-                    this.editDateTransaction(itemId, itemDateForm.value);
+                    let newDate = itemDateForm.value;
+                    if(newDate === ""){
+                        newDate = "No Date";
+                    }
+                    this.editDateTransaction(itemId, newDate);
                     this.performTransaction();
                 }
             }
