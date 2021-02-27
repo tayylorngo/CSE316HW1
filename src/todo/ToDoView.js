@@ -27,6 +27,7 @@ export default class ToDoView {
         // CREATES FORM TO CHANGE LIST NAME
         let listNameChangeInput = document.createElement("input");
         listNameChangeInput.setAttribute("id", "todo-list-text-form-" + newList.id);
+        listNameChangeInput.setAttribute("class", "listNameChangeForm");
         listNameChangeInput.style.display = "none";
 
         // CREATES OUTSIDE DIV
@@ -222,7 +223,7 @@ export default class ToDoView {
         undoButton.style.color = "#e9edf0";
     }
 
-        /**
+    /**
      * Disables the redo button
      * @author Taylor Ngo
      */

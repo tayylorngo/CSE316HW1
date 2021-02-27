@@ -219,3 +219,14 @@ html, body{
     border: none;
     outline: none;
 }
+
+.listNameChangeForm{
+    margin-top: 25px;
+    margin-left: 30px;
+    width: 70%;
+    height: 40%;
+    background-color: var(--swatch-complement);
+    color: white;
+    border: none;
+    outline: none;
+}
